@@ -8,6 +8,7 @@ packages = [{include = "example_asyncio"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
+httpx = "^0.23.3"
 
 
 [tool.poetry.group.dev.dependencies]
