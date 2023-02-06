@@ -10,7 +10,7 @@ logging.basicConfig(level=logging.CRITICAL, format='%(message)s')
 def watcher(function):
     def inner_eye(*args, **kwargs):
         try:
-            rez = function()
+            rez = function(*args, **kwargs)
 
         except Exception as error:
             logging.critical(f'Something wrong!, system error:\n{error}')
@@ -21,11 +21,13 @@ def watcher(function):
     return inner_eye
 
 
+@watcher
 def save_key(key: str) -> None:
     with open(key_file, "w") as fh:
         fh.write(key)
 
 
+@watcher
 def load_key() -> str:
     with open(key_file, "r") as fh:
         return fh.readline()

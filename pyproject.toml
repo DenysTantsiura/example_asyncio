@@ -9,6 +9,8 @@ packages = [{include = "example_asyncio"}]
 [tool.poetry.dependencies]
 python = "^3.10"
 httpx = "^0.23.3"
+aiofile = "^3.8.1"
+requests = "^2.28.2"
 
 
 [tool.poetry.group.dev.dependencies]
