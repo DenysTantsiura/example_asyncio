@@ -1,5 +1,5 @@
+import asyncio
 import logging
-# from time import time
 from timeit import default_timer
 
 
@@ -17,13 +17,23 @@ def duration(fun):
     return inner
 
 
-@duration
-def main():
-    print(default_timer())
+async def download_it():
+    print('Download function...')
+    await asyncio.sleep(1)
+    print('After sleep')
+    return 'downloaded data'
+
+# @duration
+async def main():
+    # print(default_timer())
+    print('Main function...')
+    response = download_it()
+    result = await response
+    print(f'{result=}')
 
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())
 
 
 
