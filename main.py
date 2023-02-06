@@ -39,25 +39,19 @@ async def download_it(query: str, current_count: int) -> None:
             print(f'{response.status_code=}, {response.json()=}')
     print(f'{query} - - - - - - - {current_count}')
 
-    # print('Download function...')
-    # await asyncio.sleep(1)
-    # print('After sleep')
-    # return 'downloaded data'
-
 
 @duration
 async def main():
     query = 'car'
     page_count = 5
     current_count: int = 0
+    tasks = []
     while current_count < page_count:
         current_count += 1
-        await download_it(query, current_count)
-    # # print(default_timer())
-    # print('Main function...')
-    # response = download_it()
-    # result = await response
-    # print(f'{result=}')
+        task = asyncio.create_task(download_it(query, current_count))
+        tasks.append(task) 
+    print(f'{tasks=}')
+    await asyncio.gather(*tasks, return_exceptions=True)  # if alert in some of corutine - other working
 
 
 if __name__ == "__main__":
