@@ -15,7 +15,7 @@ def async_timed():
                 return await func(*args, **kwargs)
             
             finally:
-                total = time.time() - start
+                total = round(time.time() - start, 3)
                 print(f'{total=} s.')
                 
         return wrapped
