@@ -3,3 +3,5 @@ __pycache__/
 __pycache__/authentication.cpython-310.pyc
 .idea/
 key.txt
+info.txt
+asynclog.txt
