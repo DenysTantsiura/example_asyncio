@@ -16,7 +16,7 @@ def async_timed():
             
             finally:
                 total = round(time.time() - start, 3)
-                print(f'{total=} s.')
+                print(f'Work duration:\t{total} s.')
                 
         return wrapped
     

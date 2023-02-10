@@ -1,4 +1,4 @@
-import asyncio
+# import asyncio
 
 from aiofile import async_open
 from aiopath import AsyncPath
@@ -17,7 +17,7 @@ async def async_logging_to_file(message: str) -> None:
 
     else:
         print(f'Sorry, no log-file and can\'t create "{async_log_file}"')
-        return 1
+        return None
     
     async with async_open(async_log_file, mode_file_open) as afp:
         await afp.write(f'{message}\n')
