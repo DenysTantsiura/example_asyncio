@@ -39,8 +39,9 @@ class Server:
     async def distrubute(self, ws: WebSocketServerProtocol):
         async for message in ws:
             if message.startswith('exchange'):
-                await self.send_to_clients(f'{ws.name}: {message} start on {datetime.now()}\n(Example for run:\texchange 5 USD EUR CHF)\n')
-                message = await self.get_exchange_currency(message) # await PBexchange([])
+                await self.send_to_clients(f'{ws.name}: {message} start '
+                                           f'on {datetime.now()}\n(Example for run:\texchange 5 USD EUR CHF)\n')
+                message = await self.get_exchange_currency(message)
                 await self.send_to_clients(f"Server: {message}")
             else:
                 await self.send_to_clients(f"{ws.name}: {message}")
