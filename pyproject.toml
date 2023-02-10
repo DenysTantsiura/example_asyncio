@@ -10,6 +10,8 @@ packages = [{include = "example_asyncio"}]
 python = "^3.10"
 aiofile = "^3.8.1"
 aiopath = "^0.6.11"
+websockets = "^10.4"
+names = "^0.3.0"
 
 [tool.poetry.group.dev.dependencies]
 mypy = "^0.991"
