@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "example-asyncio"
+version = "0.1.0"
+description = ""
+authors = ["Denys Tantsiura <ghost0002501@gmail.com>"]
+readme = "README.md"
+packages = [{include = "example_asyncio"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+aiofile = "^3.8.1"
+aiopath = "^0.6.11"
+websockets = "^10.4"
+names = "^0.3.0"
+
+[tool.poetry.group.dev.dependencies]
+mypy = "^0.991"
+black = {extras = ["d"], version = "^23.1.0"}
+flake8 = "^6.0.0"
+
+[tool.black]
+line-length = 119
+skip-string-normalization = true
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
