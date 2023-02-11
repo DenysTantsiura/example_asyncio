@@ -8,6 +8,7 @@ async_log_file = 'asynclog.txt'
 
 
 async def async_logging_to_file(message: str) -> None:
+    """Asunc write log to file."""
     apath = AsyncPath(async_log_file)
     if await apath.exists() and await apath.is_file():  # rewrite to try
         mode_file_open: str = 'a+'

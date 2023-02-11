@@ -7,7 +7,7 @@ def async_timed():
     
     def wrapper(func: Callable) -> Callable:
         
-        @wraps(func)
+        @wraps(func)  # for save name of function
         async def wrapped(*args, **kwargs) -> Any:
             
             start = time.time()
