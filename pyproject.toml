@@ -17,6 +17,7 @@ names = "^0.3.0"
 mypy = "^0.991"
 black = {extras = ["d"], version = "^23.1.0"}
 flake8 = "^6.0.0"
+pylint = "^2.16.1"
 
 [tool.black]
 line-length = 119
