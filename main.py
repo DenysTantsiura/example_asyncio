@@ -7,11 +7,11 @@ from typing import List
 
 import aiohttp
 
-from asyncduration import async_timed
-from asynclogging import async_logging_to_file
+from asyncduration import async_timed  # time duration decorator
+from asynclogging import async_logging_to_file  # loging to file
 
 
-logging.basicConfig(level=logging.DEBUG, format="%(threadName)s %(message)s")
+logging.basicConfig(level=logging.DEBUG, format="%(threadName)s %(message)s")  # simple logging
 URL_API_PRIVATBANK_ARCH = 'https://api.privatbank.ua/p24api/exchange_rates?json&date='
 DAY_LIMIT = 10
 
@@ -73,14 +73,14 @@ class ClientApplication:
         async with aiohttp.ClientSession() as session:
             try:
                 async with session.get(uri) as response:
-                    if response.status == 200:  # or '200'?
+                    if response.status == 200:  # all ok
                         # self.response_charset: str = response.headers['content-type'].split('charset=')[-1] if \
                         # 'charset=' in response.headers['content-type'] else None
                         # logging.info(f'CHARSET:\t{self.response_charset}')
                         # self.response_cookies = response.cookies
-                        result = await response.json()
+                        result = await response.json()  # get body of request
                         await async_logging_to_file(
-                            f'\nExchange currency information received: \t\t{datetime.now()}'
+                            f'\nInformation received: \t\t{datetime.now()}'
                         )
                         return result
 
@@ -88,7 +88,7 @@ class ClientApplication:
                         logging.error(f'Request error, status code:\n{response.status}')
                         return response.status
 
-            except aiohttp.ClientConnectorError as err:
+            except aiohttp.ClientConnectorError as err:  # others errors, restrictions by the provider, for example
                 print(f'Connection error: {uri}', str(err))
 
 
@@ -117,13 +117,14 @@ class PrivatBankExchangeRate(ClientApplication):
             self.currency_list = sys_argv[2:] or ['EUR', 'USD']
 
         except IndexError:
-            self.currency_list = ['EUR', 'USD']
+            self.currency_list = ['EUR', 'USD']  # default
 
         print(
             f'{datetime.now()}\nReceive PrivatBank exchange rate for the last {self.a_certain_past_day} day(s)...\n'
         )
 
     async def get_exchange(self) -> tuple:
+        """Create task list and return results."""
         tasks = [asyncio.create_task(self.consumer(uri)) for uri in self.uri]
         answer = await asyncio.gather(*tasks, return_exceptions=True) if tasks else None
 
@@ -141,4 +142,4 @@ async def main(sys_argv: list) -> None:
 
 if __name__ == '__main__':
     logging.info(f'{datetime.now()}\nExample for run:\tpython main.py 5 USD EUR CHF\n')
-    asyncio.run(main(sys.argv))
+    answer_for_request = asyncio.run(main(sys.argv))
